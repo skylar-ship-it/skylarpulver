@@ -347,6 +347,33 @@ nav.scrolled {
   font-style: normal;
 }
 
+.project-seo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  background: var(--blush);
+  border-left: 2px solid var(--dusty-rose);
+}
+
+.seo-item {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--stone);
+  line-height: 1.5;
+  padding-left: 12px;
+  position: relative;
+}
+
+.seo-item::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--dusty-rose);
+  font-size: 10px;
+}
+
 /* WORK SECTION */
 #work {
   padding: 100px 48px;
@@ -889,15 +916,25 @@ footer {
       <div class="project-card-inner">
         <span class="project-num">01</span>
         <div>
-          <p class="project-client">Dental Implant Center</p>
+          <p class="project-client">Dental Implant Center · Highland, IN</p>
           <h3 class="project-name">Implanted Wisdom</h3>
-          <p class="project-desc">Conversion-focused landing page with Meta Pixel, GTM tracking, and GHL form integration. Built and deployed via GitHub + Vercel.</p>
+          <p class="project-desc">Full landing page build with end-to-end technical SEO — structured data, geo targeting, keyword strategy, Open Graph, and full tracking implementation. Deployed via GitHub + Vercel.</p>
           <div class="project-tags">
             <span class="tag">Landing Page</span>
+            <span class="tag">Technical SEO</span>
+            <span class="tag">Schema / JSON-LD</span>
             <span class="tag">Meta Pixel</span>
             <span class="tag">GTM</span>
             <span class="tag">GHL</span>
+            <span class="tag">Open Graph</span>
             <span class="tag">Vercel</span>
+          </div>
+          <div class="project-seo-list">
+            <span class="seo-item">Geo-targeted title, meta description &amp; canonical URL</span>
+            <span class="seo-item">JSON-LD schema — MedicalBusiness, Physician, MedicalProcedure, FAQPage</span>
+            <span class="seo-item">Keyword strategy across H1, H2s, image alt text &amp; body copy</span>
+            <span class="seo-item">Open Graph + Twitter Card tags with custom OG thumbnail</span>
+            <span class="seo-item">XML sitemap, robots directives &amp; geo meta tags</span>
           </div>
           <span class="project-arrow">↗</span>
         </div>
