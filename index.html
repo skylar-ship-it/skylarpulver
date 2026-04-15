@@ -698,7 +698,6 @@ nav.scrolled {
 }
 
 /* CONTACT */
-#contact {
   padding: 120px 48px;
   max-width: 900px;
   margin: 0 auto;
@@ -786,7 +785,276 @@ footer {
   color: var(--smoke);
 }
 
-/* SCROLL REVEAL */
+/* PACKAGES */
+.pkg-base {
+  background: var(--warm-white);
+  border: 0.5px solid var(--smoke);
+  margin-bottom: 2px;
+}
+
+.pkg-base-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 48px 48px 40px;
+  border-bottom: 0.5px solid var(--smoke);
+  gap: 40px;
+}
+
+.pkg-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--espresso);
+  background: var(--blush);
+  border: 0.5px solid var(--dusty-rose);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+
+.pkg-base-title {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--soft-black);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.pkg-base-title em { font-style: italic; color: var(--clay); }
+
+.pkg-base-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--stone);
+  line-height: 1.7;
+  max-width: 440px;
+}
+
+.pkg-base-includes-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dusty-rose);
+  white-space: nowrap;
+  padding-top: 6px;
+}
+
+.pkg-base-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--smoke);
+}
+
+.pkg-base-item {
+  background: var(--warm-white);
+  padding: 32px;
+  transition: background 0.2s;
+}
+.pkg-base-item:hover { background: var(--blush); }
+
+.pkg-item-num {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--dusty-rose);
+  margin-bottom: 12px;
+}
+
+.pkg-item-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--soft-black);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.pkg-item-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--stone);
+  line-height: 1.7;
+}
+
+/* ADD-ONS LABEL */
+.addons-label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 48px 0 24px;
+}
+
+.addons-label-text {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dusty-rose);
+  white-space: nowrap;
+}
+
+.addons-label-rule {
+  flex: 1;
+  height: 0.5px;
+  background: rgba(200,194,190,0.3);
+}
+
+/* ADDON CARDS */
+.addon-card {
+  background: var(--espresso);
+  margin-bottom: 2px;
+  border-top: 1.5px solid var(--clay);
+}
+
+.addon-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 40px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.addon-header:hover { background: rgba(255,255,255,0.03); }
+
+.addon-header-left { flex: 1; }
+
+.addon-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dusty-rose);
+  border: 0.5px solid var(--clay);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.addon-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.addon-title em { font-style: italic; color: var(--dusty-rose); }
+
+.addon-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mauve);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.addon-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.toggle-label {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dusty-rose);
+}
+
+.toggle-icon {
+  width: 32px; height: 32px;
+  border: 0.5px solid var(--clay);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--dusty-rose);
+  transition: transform 0.35s ease;
+  line-height: 1;
+}
+.addon-card.open .toggle-icon { transform: rotate(45deg); }
+
+.addon-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.55s ease;
+}
+.addon-card.open .addon-body { max-height: 3000px; }
+
+.addon-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(200,194,190,0.1);
+  border-top: 0.5px solid rgba(200,194,190,0.1);
+}
+
+.addon-col {
+  padding: 32px 40px;
+  background: var(--espresso);
+}
+
+.addon-col-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dusty-rose);
+  margin-bottom: 20px;
+}
+
+.addon-row {
+  padding: 13px 0;
+  border-bottom: 0.5px solid rgba(200,194,190,0.1);
+}
+.addon-row:last-child { border-bottom: none; }
+
+.addon-row-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.addon-row-desc {
+  display: block;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--mauve);
+  line-height: 1.65;
+}
+
+.services-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 48px;
+  background: var(--blush);
+  border: 0.5px solid var(--dusty-rose);
+  margin-top: 32px;
+  gap: 24px;
+}
+
+.services-cta-text {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--espresso);
+}
+
+/* CONTACT */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -809,21 +1077,94 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+  /* NAV */
   nav { padding: 20px 24px; }
   nav.scrolled { padding: 14px 24px; }
   .nav-links { display: none; }
+  .nav-cta { font-size: 10px; }
+
+  /* HERO */
   #hero { grid-template-columns: 1fr; }
-  .hero-left { padding: 120px 24px 60px; }
-  .hero-right { min-height: 280px; }
-  .hero-blob { width: 280px; height: 280px; }
-  #work, #about, #services .services-inner, #contact { padding: 60px 24px; }
+  .hero-left { padding: 110px 24px 48px; }
+  .hero-name { font-size: 52px; }
+  .hero-right { min-height: 260px; }
+  .hero-blob { width: 260px; height: 260px; }
+  .hero-circle-text { width: 160px; height: 160px; }
+  .hero-photo-wrap { width: 80px; height: 80px; }
+  .hero-scroll-indicator { left: 24px; bottom: 24px; }
+
+  /* WORK */
+  #work { padding: 60px 20px; }
   .projects-grid { grid-template-columns: 1fr; }
-  .project-card.featured { grid-column: span 1; }
-  .project-card.featured .project-card-inner { flex-direction: column; gap: 0; }
-  #about { grid-template-columns: 1fr; gap: 40px; }
+  .project-card-inner { padding: 32px 24px 28px; min-height: auto; }
+  .project-name { font-size: 22px; }
+
+  /* ABOUT */
+  #about { grid-template-columns: 1fr; gap: 40px; padding: 60px 20px; }
   .about-left { position: static; }
-  .services-grid { grid-template-columns: 1fr; }
-  footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  .about-heading { font-size: 32px; }
+  .credentials { grid-template-columns: 1fr 1fr; }
+
+  /* SERVICES */
+  #services { padding: 60px 0; }
+  #services .services-inner { padding: 0 20px; }
+  .section-header { margin-bottom: 40px; }
+  .section-title { font-size: 26px; }
+
+  /* BASE PACKAGE */
+  .pkg-base-header {
+    flex-direction: column;
+    padding: 28px 20px 24px;
+    gap: 16px;
+  }
+  .pkg-base-includes-label { display: none; }
+  .pkg-base-title { font-size: 26px; }
+  .pkg-base-sub { max-width: 100%; font-size: 13px; }
+  .pkg-base-grid { grid-template-columns: 1fr; }
+  .pkg-base-item { padding: 24px 20px; }
+  .pkg-item-name { font-size: 17px; }
+
+  /* ADD-ONS LABEL */
+  .addons-label { padding: 36px 0 20px; }
+
+  /* ADDON CARDS */
+  .addon-header { padding: 24px 20px; flex-wrap: wrap; gap: 16px; }
+  .addon-title { font-size: 20px; }
+  .addon-sub { font-size: 12px; max-width: 100%; }
+  .addon-toggle { width: 100%; justify-content: space-between; }
+  .toggle-label { font-size: 10px; }
+  .addon-cols { grid-template-columns: 1fr; }
+  .addon-col { padding: 24px 20px; }
+  .addon-row-name { font-size: 12px; }
+  .addon-row-desc { font-size: 11px; }
+
+  /* SERVICES CTA */
+  .services-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 20px;
+    gap: 20px;
+  }
+  .services-cta-text { font-size: 18px; }
+
+  /* CONTACT */
+  #contact { padding: 80px 20px; }
+  .contact-heading { font-size: 36px; }
+  .contact-links { flex-direction: column; align-items: stretch; }
+  .contact-link { text-align: center; }
+
+  /* FOOTER */
+  footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .hero-name { font-size: 42px; }
+  .hero-desc { font-size: 14px; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .pkg-base-title { font-size: 22px; }
+  .about-heading { font-size: 28px; }
+  .contact-heading { font-size: 30px; }
+  .credentials { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -928,13 +1269,6 @@ footer {
             <span class="tag">GHL</span>
             <span class="tag">Open Graph</span>
             <span class="tag">Vercel</span>
-          </div>
-          <div class="project-seo-list">
-            <span class="seo-item">Geo-targeted title, meta description &amp; canonical URL</span>
-            <span class="seo-item">JSON-LD schema — MedicalBusiness, Physician, MedicalProcedure, FAQPage</span>
-            <span class="seo-item">Keyword strategy across H1, H2s, image alt text &amp; body copy</span>
-            <span class="seo-item">Open Graph + Twitter Card tags with custom OG thumbnail</span>
-            <span class="seo-item">XML sitemap, robots directives &amp; geo meta tags</span>
           </div>
           <span class="project-arrow">↗</span>
         </div>
@@ -1067,38 +1401,227 @@ footer {
       <div class="section-rule"></div>
     </div>
 
-    <div class="services-grid">
-      <div class="service-item reveal">
-        <p class="service-num">01</p>
-        <h3 class="service-name">Landing Pages &amp; Web</h3>
-        <p class="service-desc">Conversion-focused pages built from scratch and deployed fast. Pixel tracking, form integrations, GTM — the full setup, done right.</p>
+    <!-- BASE PACKAGE -->
+    <div class="pkg-base reveal">
+      <div class="pkg-base-header">
+        <div>
+          <span class="pkg-badge">Base Package</span>
+          <h3 class="pkg-base-title">Everything you need to<br><em>launch with confidence.</em></h3>
+          <p class="pkg-base-sub">Every project starts here. Brand identity built collaboratively, then brought to life as a fully custom-coded website — live, connected, and ready to grow.</p>
+        </div>
+        <div class="pkg-base-includes-label">What's included</div>
       </div>
-      <div class="service-item reveal reveal-delay-1">
-        <p class="service-num">02</p>
-        <h3 class="service-name">CRM &amp; Automation</h3>
-        <p class="service-desc">GHL workflow builds covering the full patient or customer journey — from lead intake through post-sale nurture and re-engagement.</p>
-      </div>
-      <div class="service-item reveal reveal-delay-2">
-        <p class="service-num">03</p>
-        <h3 class="service-name">Paid Media</h3>
-        <p class="service-desc">Meta and Google ad strategy, creative direction, and performance analysis. Built around real business goals, not vanity metrics.</p>
-      </div>
-      <div class="service-item reveal reveal-delay-3">
-        <p class="service-num">04</p>
-        <h3 class="service-name">Email Marketing</h3>
-        <p class="service-desc">Branded HTML email templates, full nurture sequences, and automation logic — designed to look good and actually get opened.</p>
-      </div>
-      <div class="service-item reveal reveal-delay-4">
-        <p class="service-num">05</p>
-        <h3 class="service-name">Brand Strategy</h3>
-        <p class="service-desc">Brand positioning, voice and tone, visual identity direction. For businesses that want to stand out, not blend in.</p>
-      </div>
-      <div class="service-item reveal reveal-delay-1">
-        <p class="service-num">06</p>
-        <h3 class="service-name">Marketing Strategy</h3>
-        <p class="service-desc">Campaign planning, content strategy, analytics setup, and performance reporting — the full picture, not just one channel.</p>
+      <div class="pkg-base-grid">
+        <div class="pkg-base-item">
+          <p class="pkg-item-num">01</p>
+          <h4 class="pkg-item-name">Brand Guidelines</h4>
+          <p class="pkg-item-desc">We collaborate on a full brand identity document you can hand to anyone — designer, photographer, VA — and they'll get it right. Includes color palette, typography system, logo usage rules, voice &amp; tone, messaging pillars, and imagery direction.</p>
+        </div>
+        <div class="pkg-base-item">
+          <p class="pkg-item-num">02</p>
+          <h4 class="pkg-item-name">Custom-Coded Website</h4>
+          <p class="pkg-item-desc">No templates, no page builders. Hand-written HTML &amp; CSS built to your brand — fast, clean, and fully yours. Includes mobile responsiveness, smooth animations, and a structure that actually converts.</p>
+        </div>
+        <div class="pkg-base-item">
+          <p class="pkg-item-num">03</p>
+          <h4 class="pkg-item-name">Domain Connection</h4>
+          <p class="pkg-item-desc">Your site deployed to a real domain (yourbrand.com) — DNS configuration, HTTPS setup, and Vercel deployment handled start to finish. No tech headaches on your end.</p>
+        </div>
+        <div class="pkg-base-item">
+          <p class="pkg-item-num">04</p>
+          <h4 class="pkg-item-name">Social Media Integration</h4>
+          <p class="pkg-item-desc">Links, feeds, and icons connected to your active platforms. Open Graph and social preview tags set up so every share looks intentional — not like a broken link.</p>
+        </div>
+        <div class="pkg-base-item">
+          <p class="pkg-item-num">05</p>
+          <h4 class="pkg-item-name">CRM Connection</h4>
+          <p class="pkg-item-desc">Forms, widgets, and lead capture embedded directly into your site — connected to Go High Level, Monday.com, or any CRM you use. Leads go straight where they need to go, no manual step required.</p>
+        </div>
+        <div class="pkg-base-item">
+          <p class="pkg-item-num">06</p>
+          <h4 class="pkg-item-name">Dedicated Landing Page</h4>
+          <p class="pkg-item-desc">A single-focus conversion page built for a specific offer, campaign, or service — designed to convert, deployed fast, and connected to your CRM form from day one.</p>
+        </div>
       </div>
     </div>
+
+    <!-- ADD-ONS -->
+    <div class="addons-label reveal">
+      <span class="addons-label-text">Add-on services</span>
+      <div class="addons-label-rule"></div>
+    </div>
+
+    <!-- ADDON: SEO -->
+    <div class="addon-card reveal" id="addon-seo">
+      <div class="addon-header" onclick="toggleAddon('addon-seo')">
+        <div class="addon-header-left">
+          <span class="addon-badge">Add-on</span>
+          <h3 class="addon-title">Technical <em>SEO</em></h3>
+          <p class="addon-sub">Get found on Google. Built into the code — not bolted on after.</p>
+        </div>
+        <div class="addon-toggle">
+          <span class="toggle-label">See what's included</span>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="addon-body">
+        <div class="addon-cols">
+          <div class="addon-col">
+            <p class="addon-col-label">Technical foundation</p>
+            <div class="addon-row"><span class="addon-row-name">Title tag &amp; meta description</span><span class="addon-row-desc">Hand-written, keyword-targeted copy that controls how your site appears in Google — the first impression before anyone clicks.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Canonical URL</span><span class="addon-row-desc">Prevents duplicate content penalties when your site lives on multiple domains (Vercel + custom domain).</span></div>
+            <div class="addon-row"><span class="addon-row-name">XML sitemap + robots.txt</span><span class="addon-row-desc">A complete map of your site submitted to Google so every page gets crawled and indexed fast.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Geo meta tags</span><span class="addon-row-desc">Ties your site to a specific city and coordinates — a local signal that helps you rank for "[service] near me" searches.</span></div>
+          </div>
+          <div class="addon-col">
+            <p class="addon-col-label">On-page &amp; keyword strategy</p>
+            <div class="addon-row"><span class="addon-row-name">Keyword research &amp; placement</span><span class="addon-row-desc">Research-backed keywords woven into headlines, body copy, and image alt text — so Google knows exactly what you do and where you do it.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Image alt text</span><span class="addon-row-desc">Every image tagged with descriptive, keyword-rich alt text — improving both search visibility and accessibility.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Open Graph + Twitter Card</span><span class="addon-row-desc">Controls how your site previews when shared on Facebook, LinkedIn, iMessage, and X — branded thumbnail included.</span></div>
+          </div>
+          <div class="addon-col">
+            <p class="addon-col-label">Structured data (schema)</p>
+            <div class="addon-row"><span class="addon-row-name">LocalBusiness / MedicalBusiness</span><span class="addon-row-desc">Tells Google your name, address, hours, and service area so you can appear in the map pack and local rich results.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Physician / Person schema</span><span class="addon-row-desc">For practices and personal brands — surfaces credentials, specialties, and affiliations directly in search.</span></div>
+            <div class="addon-row"><span class="addon-row-name">FAQPage schema</span><span class="addon-row-desc">Makes your FAQ answers appear as expandable rich snippets in Google — more visibility, more clicks, no extra ad spend.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Service / Procedure schema</span><span class="addon-row-desc">Marks up your core offerings so Google can match you to exactly the right high-intent searches.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADDON: EMAIL & AUTOMATIONS -->
+    <div class="addon-card reveal" id="addon-email">
+      <div class="addon-header" onclick="toggleAddon('addon-email')">
+        <div class="addon-header-left">
+          <span class="addon-badge">Add-on</span>
+          <h3 class="addon-title">CRM Emails &amp; <em>Automations</em></h3>
+          <p class="addon-sub">Branded emails and smart workflows that run your follow-up while you sleep.</p>
+        </div>
+        <div class="addon-toggle">
+          <span class="toggle-label">See what's included</span>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="addon-body">
+        <div class="addon-cols">
+          <div class="addon-col">
+            <p class="addon-col-label">Custom HTML emails</p>
+            <div class="addon-row"><span class="addon-row-name">Booking confirmation</span><span class="addon-row-desc">Branded email sent automatically when someone books — confirms the appointment, sets expectations, and builds trust before they walk in the door.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Welcome email</span><span class="addon-row-desc">First impression email for new leads or patients — introduces your brand, sets the tone, and gives them next steps.</span></div>
+            <div class="addon-row"><span class="addon-row-name">No-show &amp; re-engagement</span><span class="addon-row-desc">Automatically follows up with leads who went cold or missed an appointment — bringing them back without a manual call.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Nurture sequence</span><span class="addon-row-desc">A series of emails that educate, build trust, and move leads toward booking — deployed over days or weeks on autopilot.</span></div>
+          </div>
+          <div class="addon-col">
+            <p class="addon-col-label">Workflow automations (GHL)</p>
+            <div class="addon-row"><span class="addon-row-name">Lead intake to booking flow</span><span class="addon-row-desc">From the moment a form is submitted — auto-tag, assign, send a confirmation, and trigger the right follow-up sequence based on what they filled out.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Appointment reminders (email + SMS)</span><span class="addon-row-desc">Automated reminders sent at 48 hrs and 24 hrs before an appointment — reduces no-shows without lifting a finger.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Post-visit review request</span><span class="addon-row-desc">Automatically sends a Google review request after a visit — timed for when patient satisfaction is highest.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Pipeline stage triggers</span><span class="addon-row-desc">Every time a lead moves stages in your CRM, the right action fires — email, SMS, task, or internal notification. Nothing falls through the cracks.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADDON: CUSTOM FORMS -->
+    <div class="addon-card reveal" id="addon-forms">
+      <div class="addon-header" onclick="toggleAddon('addon-forms')">
+        <div class="addon-header-left">
+          <span class="addon-badge">Add-on</span>
+          <h3 class="addon-title">Custom <em>Forms</em></h3>
+          <p class="addon-sub">Intake forms and lead capture built to convert — connected to your CRM via Zapier.</p>
+        </div>
+        <div class="addon-toggle">
+          <span class="toggle-label">See what's included</span>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="addon-body">
+        <div class="addon-cols">
+          <div class="addon-col">
+            <p class="addon-col-label">Form design &amp; build</p>
+            <div class="addon-row"><span class="addon-row-name">Branded intake forms</span><span class="addon-row-desc">Custom-designed forms that match your site — not generic embeds. Structured to collect the right information without friction.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Multi-step forms</span><span class="addon-row-desc">Breaking a long form into short steps increases completion rate significantly. Especially effective for consultations and assessments.</span></div>
+            <div class="addon-row"><span class="addon-row-name">SMS consent fields</span><span class="addon-row-desc">A2P 10DLC compliant opt-in language built into the form so you can legally text leads from day one.</span></div>
+          </div>
+          <div class="addon-col">
+            <p class="addon-col-label">Zapier integrations</p>
+            <div class="addon-row"><span class="addon-row-name">Form → CRM connection</span><span class="addon-row-desc">Every submission flows directly into your CRM as a new contact or lead — no copy/paste, no missed inquiries.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Form → notification routing</span><span class="addon-row-desc">Instant email or Slack alert to the right person the moment a form is submitted — so no lead waits more than a few minutes for a response.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Conditional logic</span><span class="addon-row-desc">Show or hide fields based on previous answers — so the form adapts to each person and only asks what's relevant.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADDON: PAID ADS -->
+    <div class="addon-card reveal" id="addon-ads">
+      <div class="addon-header" onclick="toggleAddon('addon-ads')">
+        <div class="addon-header-left">
+          <span class="addon-badge">Add-on</span>
+          <h3 class="addon-title">Paid Ads <em>Setup</em></h3>
+          <p class="addon-sub">Meta and Google campaigns built around real business goals — not vanity metrics.</p>
+        </div>
+        <div class="addon-toggle">
+          <span class="toggle-label">See what's included</span>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="addon-body">
+        <div class="addon-cols">
+          <div class="addon-col">
+            <p class="addon-col-label">Meta ads (Facebook &amp; Instagram)</p>
+            <div class="addon-row"><span class="addon-row-name">Campaign structure</span><span class="addon-row-desc">Campaigns built with the right objective (leads, conversions, traffic) and structured so you can test and scale without starting over.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Pixel &amp; event verification</span><span class="addon-row-desc">Meta Pixel installed, tested, and verified — so your campaigns optimize off real conversion data, not clicks.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Audience setup</span><span class="addon-row-desc">Custom audiences, lookalikes, and retargeting pools built from your existing traffic and leads.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Creative direction</span><span class="addon-row-desc">Ad copy and creative brief — what to say, how to say it, and what kind of visuals perform for your audience.</span></div>
+          </div>
+          <div class="addon-col">
+            <p class="addon-col-label">Tracking setup</p>
+            <div class="addon-row"><span class="addon-row-name">Meta Pixel installation</span><span class="addon-row-desc">Pixel installed, tested, and verified — so your campaigns optimize off real conversion data, not just clicks.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Google Tag Manager</span><span class="addon-row-desc">GTM configured to track form fills, calls, and key actions — gives Google's algorithm real signals to optimize against.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Conversion event setup</span><span class="addon-row-desc">Every meaningful action (form submit, phone click, button click) tracked as a conversion — so you know exactly what's driving results.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADDON: ANALYTICS -->
+    <div class="addon-card reveal" id="addon-analytics">
+      <div class="addon-header" onclick="toggleAddon('addon-analytics')">
+        <div class="addon-header-left">
+          <span class="addon-badge">Add-on</span>
+          <h3 class="addon-title">Analytics &amp; <em>Reporting</em></h3>
+          <p class="addon-sub">Know what's working. GA4 setup, goal tracking, and a monthly report that actually makes sense.</p>
+        </div>
+        <div class="addon-toggle">
+          <span class="toggle-label">See what's included</span>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="addon-body">
+        <div class="addon-cols">
+          <div class="addon-col">
+            <p class="addon-col-label">Setup &amp; configuration</p>
+            <div class="addon-row"><span class="addon-row-name">GA4 installation</span><span class="addon-row-desc">Google Analytics 4 configured via GTM — tracking pageviews, sessions, and user behavior from day one.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Conversion goal tracking</span><span class="addon-row-desc">Form submissions, phone clicks, button clicks, and scroll depth tracked as goals — so you can see exactly what's driving results.</span></div>
+            <div class="addon-row"><span class="addon-row-name">UTM parameter setup</span><span class="addon-row-desc">Every link from every channel tagged so you know exactly where your traffic and leads are coming from.</span></div>
+          </div>
+          <div class="addon-col">
+            <p class="addon-col-label">Ongoing reporting</p>
+            <div class="addon-row"><span class="addon-row-name">Monthly performance report</span><span class="addon-row-desc">A clean, plain-English summary of what happened last month — traffic, leads, top pages, and what to focus on next.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Ad performance review</span><span class="addon-row-desc">If you're running paid ads, your monthly report includes spend, cost-per-lead, and recommendations for the next month.</span></div>
+            <div class="addon-row"><span class="addon-row-name">Google Search Console setup</span><span class="addon-row-desc">Sitemap submitted, indexing monitored, and keyword rankings tracked — so you can watch your SEO compound over time.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-cta reveal">
+      <p class="services-cta-text">Not sure which add-ons you need?</p>
+      <a href="mailto:pulverskylar@gmail.com" class="btn-primary" style="display:inline-block;">Let's talk through it</a>
+    </div>
+
   </div>
 </section>
 
@@ -1117,10 +1640,19 @@ footer {
 <!-- FOOTER -->
 <footer>
   <a href="#" class="footer-brand">Skylar Pulver</a>
-  <span class="footer-meta">© 2025 · Chicago, IL · Built with intention</span>
+  <span class="footer-meta">© 2026 · Chicago, IL · Built with intention</span>
 </footer>
 
 <script>
+// Addon toggles
+function toggleAddon(id) {
+  const card = document.getElementById(id);
+  const isOpen = card.classList.contains('open');
+  const label = card.querySelector('.toggle-label');
+  card.classList.toggle('open');
+  label.textContent = isOpen ? 'See what\'s included' : 'Close';
+}
+
 // Custom cursor
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
