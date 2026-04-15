@@ -137,44 +137,62 @@ nav.scrolled {
 .hero-right {
   position: relative;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
-  overflow: hidden;
+}
+
+.hero-blob {
+  position: absolute;
+  width: 520px; height: 520px;
+  border-radius: 50% 42% 58% 44% / 48% 52% 46% 54%;
   background: var(--blush);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: blobMorph 12s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes blobMorph {
+  0%, 100% { border-radius: 50% 42% 58% 44% / 48% 52% 46% 54%; }
+  33% { border-radius: 62% 38% 46% 54% / 44% 58% 42% 56%; }
+  66% { border-radius: 44% 56% 52% 48% / 56% 44% 58% 42%; }
+}
+
+.hero-circle-text {
+  position: absolute;
+  width: 200px; height: 200px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.hero-circle-text svg {
+  width: 100%; height: 100%;
+  animation: rotateSlow 20s linear infinite;
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .hero-photo-wrap {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 3;
+  border: 2px solid var(--warm-white);
 }
 
 .hero-photo {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
   filter: saturate(0.88) contrast(1.04);
-}
-
-.hero-photo-tag {
-  position: absolute;
-  bottom: 40px;
-  left: 32px;
-  background: rgba(250,247,242,0.88);
-  backdrop-filter: blur(8px);
-  padding: 10px 18px;
-  border-left: 2px solid var(--dusty-rose);
-}
-
-.hero-photo-tag-text {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--stone);
 }
 
 .hero-eyebrow {
@@ -821,11 +839,19 @@ footer {
   </div>
 
   <div class="hero-right">
+    <div class="hero-blob"></div>
+    <div class="hero-circle-text">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <path id="circle-path" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
+        </defs>
+        <text font-family="DM Sans" font-size="10" font-weight="400" letter-spacing="3" fill="#B08880">
+          <textPath href="#circle-path">Marketing · Strategy · Web · Chicago ·&nbsp;&nbsp;</textPath>
+        </text>
+      </svg>
+    </div>
     <div class="hero-photo-wrap">
       <img src="headshot.jpeg" alt="Skylar Pulver" class="hero-photo" />
-      <div class="hero-photo-tag">
-        <span class="hero-photo-tag-text">Marketing &amp; Web · Chicago</span>
-      </div>
     </div>
   </div>
 </section>
