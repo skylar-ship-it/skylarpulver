@@ -125,6 +125,8 @@ nav.scrolled {
   overflow: hidden;
 }
 
+
+
 .hero-left {
   padding: 140px 48px 80px;
   display: flex;
@@ -141,15 +143,46 @@ nav.scrolled {
   justify-content: center;
 }
 
-.hero-blob {
+/* Wrapper that rolls along the dividing line */
+.blob-roller {
   position: absolute;
-  width: 520px; height: 520px;
+  left: -50%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200%; /* spans full hero width so it can roll edge to edge */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  animation: blobDrop 1s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.3s,
+             blobRoll 18s ease-in-out infinite 1.4s;
+  opacity: 0;
+}
+
+@keyframes blobDrop {
+  from { opacity: 0; transform: translateY(calc(-50% - 180px)); }
+  to   { opacity: 1; transform: translateY(-50%); }
+}
+
+/* Rolls gently left and right along the dividing line */
+@keyframes blobRoll {
+  0%   { transform: translateY(-50%) translateX(0px)   rotate(0deg); }
+  25%  { transform: translateY(-50%) translateX(60px)  rotate(30deg); }
+  50%  { transform: translateY(-50%) translateX(0px)   rotate(0deg); }
+  75%  { transform: translateY(-50%) translateX(-60px) rotate(-30deg); }
+  100% { transform: translateY(-50%) translateX(0px)   rotate(0deg); }
+}
+
+.hero-blob {
+  width: 340px; height: 340px;
   border-radius: 50% 42% 58% 44% / 48% 52% 46% 54%;
   background: var(--blush);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  flex-shrink: 0;
   animation: blobMorph 12s ease-in-out infinite;
-  z-index: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes blobMorph {
@@ -164,6 +197,7 @@ nav.scrolled {
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
+  pointer-events: none;
 }
 
 .hero-circle-text svg {
@@ -1088,9 +1122,10 @@ footer {
   .hero-left { padding: 110px 24px 48px; }
   .hero-name { font-size: 52px; }
   .hero-right { min-height: 260px; }
-  .hero-blob { width: 260px; height: 260px; }
-  .hero-circle-text { width: 160px; height: 160px; }
-  .hero-photo-wrap { width: 80px; height: 80px; }
+  .hero-blob { width: 220px; height: 220px; }
+  .hero-circle-text { width: 140px; height: 140px; }
+  .hero-photo-wrap { width: 70px; height: 70px; }
+  .blob-roller { animation: blobDrop 1s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.3s, blobRoll 18s ease-in-out infinite 1.4s; }
   .hero-scroll-indicator { left: 24px; bottom: 24px; }
 
   /* WORK */
@@ -1179,7 +1214,7 @@ footer {
 <nav id="nav">
   <a href="#" class="nav-logo">SP</a>
   <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -1198,7 +1233,7 @@ footer {
     <div class="hero-divider"></div>
     <p class="hero-desc">I build brands and the digital experiences behind them — strategy, landing pages, automation, and paid media that actually convert.</p>
     <div class="hero-actions">
-      <a href="#work" class="btn-primary">View Work</a>
+      <a href="#portfolio" class="btn-primary">View Portfolio</a>
       <a href="#contact" class="btn-ghost">Let's Talk</a>
     </div>
     <div class="hero-scroll-indicator">
@@ -1208,19 +1243,22 @@ footer {
   </div>
 
   <div class="hero-right">
-    <div class="hero-blob"></div>
-    <div class="hero-circle-text">
-      <svg viewBox="0 0 200 200">
-        <defs>
-          <path id="circle-path" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
-        </defs>
-        <text font-family="DM Sans" font-size="10" font-weight="400" letter-spacing="3" fill="#B08880">
-          <textPath href="#circle-path">Marketing · Strategy · Web · Chicago ·&nbsp;&nbsp;</textPath>
-        </text>
-      </svg>
-    </div>
-    <div class="hero-photo-wrap">
-      <img src="headshot.jpeg" alt="Skylar Pulver" class="hero-photo" />
+    <div class="blob-roller">
+      <div class="hero-blob">
+        <div class="hero-circle-text">
+          <svg viewBox="0 0 200 200">
+            <defs>
+              <path id="circle-path" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
+            </defs>
+            <text font-family="DM Sans" font-size="10" font-weight="400" letter-spacing="3" fill="#B08880">
+              <textPath href="#circle-path">Marketing · Strategy · Web · Chicago ·&nbsp;&nbsp;</textPath>
+            </text>
+          </svg>
+        </div>
+        <div class="hero-photo-wrap">
+          <img src="headshot.jpeg" alt="Skylar Pulver" class="hero-photo" />
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1244,10 +1282,10 @@ footer {
 </div>
 
 <!-- WORK -->
-<section id="work">
+<section id="portfolio">
   <div class="section-header reveal">
     <span class="section-num">01</span>
-    <h2 class="section-title">Selected Work</h2>
+    <h2 class="section-title">Portfolio</h2>
     <div class="section-rule"></div>
   </div>
 
@@ -1634,7 +1672,7 @@ footer {
   <div class="contact-links reveal reveal-delay-3">
     <a href="mailto:pulverskylar@gmail.com" class="contact-link primary">Send an email</a>
     <a href="https://linkedin.com/in/skylarpulver" target="_blank" class="contact-link">LinkedIn</a>
-    <a href="#work" class="contact-link">View work</a>
+    <a href="#portfolio" class="contact-link">View work</a>
   </div>
 </section>
 
