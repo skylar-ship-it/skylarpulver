@@ -143,46 +143,15 @@ nav.scrolled {
   justify-content: center;
 }
 
-/* Wrapper that rolls along the dividing line */
-.blob-roller {
-  position: absolute;
-  left: -50%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 200%; /* spans full hero width so it can roll edge to edge */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 4;
-  animation: blobDrop 1s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.3s,
-             blobRoll 18s ease-in-out infinite 1.4s;
-  opacity: 0;
-}
-
-@keyframes blobDrop {
-  from { opacity: 0; transform: translateY(calc(-50% - 180px)); }
-  to   { opacity: 1; transform: translateY(-50%); }
-}
-
-/* Rolls gently left and right along the dividing line */
-@keyframes blobRoll {
-  0%   { transform: translateY(-50%) translateX(0px)   rotate(0deg); }
-  25%  { transform: translateY(-50%) translateX(60px)  rotate(30deg); }
-  50%  { transform: translateY(-50%) translateX(0px)   rotate(0deg); }
-  75%  { transform: translateY(-50%) translateX(-60px) rotate(-30deg); }
-  100% { transform: translateY(-50%) translateX(0px)   rotate(0deg); }
-}
-
 .hero-blob {
-  width: 340px; height: 340px;
+  position: absolute;
+  width: 520px; height: 520px;
   border-radius: 50% 42% 58% 44% / 48% 52% 46% 54%;
   background: var(--blush);
-  flex-shrink: 0;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
   animation: blobMorph 12s ease-in-out infinite;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 0;
 }
 
 @keyframes blobMorph {
@@ -197,7 +166,6 @@ nav.scrolled {
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  pointer-events: none;
 }
 
 .hero-circle-text svg {
@@ -1243,22 +1211,19 @@ footer {
   </div>
 
   <div class="hero-right">
-    <div class="blob-roller">
-      <div class="hero-blob">
-        <div class="hero-circle-text">
-          <svg viewBox="0 0 200 200">
-            <defs>
-              <path id="circle-path" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
-            </defs>
-            <text font-family="DM Sans" font-size="10" font-weight="400" letter-spacing="3" fill="#B08880">
-              <textPath href="#circle-path">Marketing · Strategy · Web · Chicago ·&nbsp;&nbsp;</textPath>
-            </text>
-          </svg>
-        </div>
-        <div class="hero-photo-wrap">
-          <img src="headshot.jpeg" alt="Skylar Pulver" class="hero-photo" />
-        </div>
-      </div>
+    <div class="hero-blob"></div>
+    <div class="hero-circle-text">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <path id="circle-path" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
+        </defs>
+        <text font-family="DM Sans" font-size="10" font-weight="400" letter-spacing="3" fill="#B08880">
+          <textPath href="#circle-path">Marketing · Strategy · Web · Chicago ·&nbsp;&nbsp;</textPath>
+        </text>
+      </svg>
+    </div>
+    <div class="hero-photo-wrap">
+      <img src="headshot.jpeg" alt="Skylar Pulver" class="hero-photo" />
     </div>
   </div>
 </section>
