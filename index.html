@@ -416,8 +416,8 @@ nav.scrolled {
 }
 
 .projects-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 2px;
   background: var(--smoke);
 }
@@ -429,39 +429,133 @@ nav.scrolled {
   cursor: none;
   text-decoration: none;
   display: block;
+  transition: background 0.3s ease;
 }
+.project-card:hover { background: var(--blush); }
 
 .project-card-inner {
-  padding: 48px 40px 40px;
-  min-height: 340px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 280px;
   position: relative;
   z-index: 2;
 }
 
-.project-bg {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 1;
+/* LEFT — browser mockup */
+.project-preview {
+  position: relative;
+  background: var(--cream);
+  border-right: 0.5px solid var(--smoke);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
 }
 
-.project-card:hover .project-bg { opacity: 1; }
-.project-card:nth-child(1) .project-bg { background: #F5EDE8; }
-.project-card:nth-child(2) .project-bg { background: #EDE8F0; }
-.project-card:nth-child(3) .project-bg { background: #E8EEE8; }
-.project-card:nth-child(4) .project-bg { background: #F0EAE8; }
+.browser-frame {
+  width: 100%;
+  max-width: 340px;
+  background: var(--warm-white);
+  border-radius: 8px;
+  border: 0.5px solid var(--smoke);
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(61,36,32,0.08);
+}
+
+.browser-bar {
+  background: #F0EDE8;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 0.5px solid var(--smoke);
+}
+
+.browser-dots {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.browser-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.browser-dot:nth-child(1) { background: #EDADA4; }
+.browser-dot:nth-child(2) { background: #F5D08A; }
+.browser-dot:nth-child(3) { background: #A8D4A0; }
+
+.browser-url {
+  flex: 1;
+  background: var(--warm-white);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 9px;
+  font-weight: 300;
+  color: var(--stone);
+  letter-spacing: 0.04em;
+  border: 0.5px solid var(--smoke);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.browser-screen-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.browser-iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.iframe-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fallback-label {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--mauve);
+}
+
+.browser-screen-placeholder {
+  width: 100%;
+  aspect-ratio: 16/10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RIGHT — project info */
+.project-info {
+  padding: 36px 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .project-num {
   font-family: var(--serif);
   font-size: 11px;
   font-style: italic;
   color: var(--smoke);
-  margin-bottom: 48px;
+  margin-bottom: 20px;
   transition: color 0.3s;
+  display: block;
 }
 .project-card:hover .project-num { color: var(--dusty-rose); }
 
@@ -471,32 +565,31 @@ nav.scrolled {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--mauve);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .project-name {
   font-family: var(--serif);
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 300;
   line-height: 1.2;
   color: var(--soft-black);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .project-desc {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 300;
   line-height: 1.7;
   color: var(--stone);
-  margin-bottom: 28px;
-  max-width: 340px;
+  margin-bottom: 20px;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 28px;
+  gap: 5px;
+  margin-bottom: 20px;
 }
 
 .tag {
@@ -504,11 +597,21 @@ nav.scrolled {
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border: 0.5px solid var(--smoke);
   color: var(--stone);
   transition: border-color 0.2s, color 0.2s;
 }
+.project-card:hover .tag { border-color: var(--dusty-rose); color: var(--clay); }
+
+.project-arrow {
+  font-size: 16px;
+  color: var(--smoke);
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+  margin-top: auto;
+}
+.project-card:hover .project-arrow { transform: translate(4px, -4px); color: var(--clay); }
 .project-card:hover .tag { border-color: var(--dusty-rose); color: var(--clay); }
 
 .project-arrow {
@@ -1106,9 +1209,10 @@ footer {
 
   /* WORK */
   #work { padding: 60px 20px; }
-  .projects-grid { grid-template-columns: 1fr; }
-  .project-card-inner { padding: 32px 24px 28px; min-height: auto; }
-  .project-name { font-size: 22px; }
+  .project-card-inner { grid-template-columns: 1fr; }
+  .project-preview { border-right: none; border-bottom: 0.5px solid var(--smoke); padding: 20px; }
+  .browser-frame { max-width: 100%; }
+  .project-info { padding: 24px 20px; }
 
   /* ABOUT */
   #about { grid-template-columns: 1fr; gap: 40px; padding: 60px 20px; }
@@ -1265,22 +1369,38 @@ footer {
   <div class="projects-grid">
 
     <a href="https://www.implantedwisdom.com" target="_blank" class="project-card reveal reveal-delay-1">
-      <div class="project-bg"></div>
       <div class="project-card-inner">
-        <span class="project-num">01</span>
-        <div>
-          <p class="project-client">Dental Implant Center · Highland, IN</p>
-          <h3 class="project-name">Implanted Wisdom</h3>
-          <p class="project-desc">Full landing page build with end-to-end technical SEO — structured data, geo targeting, keyword strategy, Open Graph, and full tracking implementation. Deployed via GitHub + Vercel.</p>
-          <div class="project-tags">
-            <span class="tag">Landing Page</span>
-            <span class="tag">Technical SEO</span>
-            <span class="tag">Schema / JSON-LD</span>
-            <span class="tag">Meta Pixel</span>
-            <span class="tag">GTM</span>
-            <span class="tag">GHL</span>
-            <span class="tag">Open Graph</span>
-            <span class="tag">Vercel</span>
+        <div class="project-preview">
+          <div class="browser-frame">
+            <div class="browser-bar">
+              <div class="browser-dots">
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+              </div>
+              <span class="browser-url">implantedwisdom.com</span>
+            </div>
+            <div class="browser-screen-wrap">
+              <video class="browser-iframe" autoplay muted loop playsinline>
+                <source src="IW.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <span class="project-num">01</span>
+          <div>
+            <p class="project-client">Dental Implant Center · Highland, IN</p>
+            <h3 class="project-name">Implanted Wisdom</h3>
+            <p class="project-desc">Full landing page build with end-to-end technical SEO — structured data, geo targeting, keyword strategy, Open Graph, and full tracking implementation.</p>
+            <div class="project-tags">
+              <span class="tag">Landing Page</span>
+              <span class="tag">Technical SEO</span>
+              <span class="tag">Schema / JSON-LD</span>
+              <span class="tag">Meta Pixel</span>
+              <span class="tag">GTM</span>
+              <span class="tag">GHL</span>
+            </div>
           </div>
           <span class="project-arrow">↗</span>
         </div>
@@ -1288,17 +1408,36 @@ footer {
     </a>
 
     <a href="https://ambir-website.vercel.app" target="_blank" class="project-card reveal reveal-delay-2">
-      <div class="project-bg"></div>
       <div class="project-card-inner">
-        <span class="project-num">02</span>
-        <div>
-          <p class="project-client">Concept Rebrand</p>
-          <h3 class="project-name">Ambir</h3>
-          <p class="project-desc">An unsolicited brand concept that sparked a real rebrand conversation. Designed to show what the brand could become — and opened the door.</p>
-          <div class="project-tags">
-            <span class="tag">Brand Strategy</span>
-            <span class="tag">Web Design</span>
-            <span class="tag">Concept</span>
+        <div class="project-preview">
+          <div class="browser-frame">
+            <div class="browser-bar">
+              <div class="browser-dots">
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+              </div>
+              <span class="browser-url">ambir-website.vercel.app</span>
+            </div>
+            <div class="browser-screen-wrap">
+              <iframe src="https://ambir-website.vercel.app" class="browser-iframe" scrolling="no" tabindex="-1"></iframe>
+              <div class="iframe-fallback" style="background:#EDE8F0;">
+                <span class="fallback-label">ambir-website.vercel.app</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <span class="project-num">02</span>
+          <div>
+            <p class="project-client">Concept Rebrand</p>
+            <h3 class="project-name">Ambir</h3>
+            <p class="project-desc">An unsolicited brand concept that sparked a real rebrand conversation. Designed to show what the brand could become — and opened the door.</p>
+            <div class="project-tags">
+              <span class="tag">Brand Strategy</span>
+              <span class="tag">Web Design</span>
+              <span class="tag">Concept</span>
+            </div>
           </div>
           <span class="project-arrow">↗</span>
         </div>
@@ -1306,17 +1445,36 @@ footer {
     </a>
 
     <a href="https://kaplunovlaw.com" target="_blank" class="project-card reveal reveal-delay-3">
-      <div class="project-bg"></div>
       <div class="project-card-inner">
-        <span class="project-num">03</span>
-        <div>
-          <p class="project-client">Real Estate Law Firm</p>
-          <h3 class="project-name">Kaplunov Law</h3>
-          <p class="project-desc">Clean, professional landing page for a boutique real estate attorney. Built for credibility, clarity, and conversion.</p>
-          <div class="project-tags">
-            <span class="tag">Landing Page</span>
-            <span class="tag">HTML / CSS</span>
-            <span class="tag">Vercel</span>
+        <div class="project-preview">
+          <div class="browser-frame">
+            <div class="browser-bar">
+              <div class="browser-dots">
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+              </div>
+              <span class="browser-url">kaplunovlaw.com</span>
+            </div>
+            <div class="browser-screen-wrap">
+              <iframe src="https://kaplunovlaw.com" class="browser-iframe" scrolling="no" tabindex="-1"></iframe>
+              <div class="iframe-fallback" style="background:#E8EEE8;">
+                <span class="fallback-label">kaplunovlaw.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <span class="project-num">03</span>
+          <div>
+            <p class="project-client">Real Estate Law Firm</p>
+            <h3 class="project-name">Kaplunov Law</h3>
+            <p class="project-desc">Clean, professional landing page for a boutique real estate attorney. Built for credibility, clarity, and conversion.</p>
+            <div class="project-tags">
+              <span class="tag">Landing Page</span>
+              <span class="tag">HTML / CSS</span>
+              <span class="tag">Vercel</span>
+            </div>
           </div>
           <span class="project-arrow">↗</span>
         </div>
@@ -1324,17 +1482,34 @@ footer {
     </a>
 
     <a href="https://new-found-visuals-2.vercel.app" target="_blank" class="project-card reveal reveal-delay-4">
-      <div class="project-bg"></div>
       <div class="project-card-inner">
-        <span class="project-num">04</span>
-        <div>
-          <p class="project-client">Photography &amp; Creative</p>
-          <h3 class="project-name">New Found Visuals</h3>
-          <p class="project-desc">Portfolio-forward website for a creative visual brand. Editorial structure designed to let the work speak — and make people stop scrolling.</p>
-          <div class="project-tags">
-            <span class="tag">Web Design</span>
-            <span class="tag">Brand</span>
-            <span class="tag">Editorial</span>
+        <div class="project-preview">
+          <div class="browser-frame">
+            <div class="browser-bar">
+              <div class="browser-dots">
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+              </div>
+              <span class="browser-url">new-found-visuals-2.vercel.app</span>
+            </div>
+            <img src="preview-newfound.png" alt="New Found Visuals website preview" class="browser-screen" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="browser-screen-placeholder" style="display:none; background:#F0EAE8;">
+              <span style="font-family:var(--serif); font-size:13px; font-style:italic; color:var(--mauve);">new-found-visuals-2.vercel.app</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <span class="project-num">04</span>
+          <div>
+            <p class="project-client">Photography &amp; Creative</p>
+            <h3 class="project-name">New Found Visuals</h3>
+            <p class="project-desc">Portfolio-forward website for a creative visual brand. Editorial structure designed to let the work speak — and make people stop scrolling.</p>
+            <div class="project-tags">
+              <span class="tag">Web Design</span>
+              <span class="tag">Brand</span>
+              <span class="tag">Editorial</span>
+            </div>
           </div>
           <span class="project-arrow">↗</span>
         </div>
