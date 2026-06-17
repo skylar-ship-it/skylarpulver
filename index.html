@@ -89,10 +89,18 @@ nav.scrolled {
   border-bottom: 0.5px solid var(--champagne);
 }
 .nav-logo {
-  font-family: var(--serif);
-  font-size: 20px; font-style: italic; font-weight: 300;
-  color: var(--soft-black); text-decoration: none;
-  letter-spacing: .04em;
+  display: flex; align-items: center;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 36px; width: auto;
+  opacity: .72;
+  filter: saturate(0.6) brightness(0.55);
+  transition: opacity .25s ease, filter .25s ease;
+}
+.nav-logo:hover img {
+  opacity: .9;
+  filter: saturate(0.8) brightness(0.45);
 }
 .nav-links {
   display: flex; gap: 36px; list-style: none;
@@ -152,19 +160,7 @@ nav.scrolled {
 }
 
 /* The embossed-look floral SVG ring behind the photo */
-.hero-floral-ring {
-  position: absolute;
-  width: 480px; height: 480px;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  opacity: .13;
-  animation: floralBreath 10s ease-in-out infinite;
-}
-@keyframes floralBreath {
-  0%,100% { transform: translate(-50%,-50%) scale(1) rotate(0deg); }
-  50%      { transform: translate(-50%,-50%) scale(1.025) rotate(4deg); }
-}
+/* hero-floral-ring removed — replaced by SP watermark */
 
 .hero-circle-text {
   position: absolute;
@@ -195,15 +191,22 @@ nav.scrolled {
   filter: saturate(.88) contrast(1.04);
 }
 
-/* Monogram emboss — top right corner decorative */
-.hero-monogram {
+/* Large SP watermark behind headshot in hero-right */
+.hero-sp-watermark {
   position: absolute;
-  top: 60px; right: 52px;
-  z-index: 2;
-  opacity: .18;
+  width: 380px; height: 380px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: .12;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  animation: floralBreath 14s ease-in-out infinite;
 }
-.hero-monogram svg {
-  width: 52px; height: 52px;
+.hero-sp-watermark img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  filter: saturate(0.4) brightness(0.7);
 }
 
 .hero-eyebrow {
@@ -300,11 +303,14 @@ nav.scrolled {
 .ticker-item {
   font-family: var(--serif); font-size: 14px;
   font-style: italic; font-weight: 300;
-  color: var(--champagne); padding: 0 28px;
+  color: var(--champagne); padding: 0 48px;
+  letter-spacing: .06em;
 }
-.ticker-dot { color: var(--dusty-rose); font-style: normal; }
 
-/* ── SECTION HEADER ── */
+
+/* Ticker visibility — desktop shows standalone, mobile shows in-hero */
+.hero-ticker  { display: none; }
+.desktop-ticker { display: block; }
 .section-header {
   display: flex; align-items: baseline; gap: 16px;
   margin-bottom: 0; padding: 72px 52px 48px;
@@ -763,7 +769,14 @@ footer {
   nav.scrolled { padding: 14px 24px; }
   .nav-links { display: none; }
   .nav-cta { font-size: 10px; }
-  .hero-monogram { display: none; }
+
+  /* Ticker: hide standalone, show in-hero spanning full width */
+  .desktop-ticker { display: none; }
+  .hero-ticker {
+    display: block;
+    grid-column: 1 / -1;   /* span both columns (only 1 on mobile anyway) */
+    align-self: end;
+  }
 
   #hero { grid-template-columns: 1fr; }
   .hero-left { padding: 110px 24px 48px; }
@@ -832,7 +845,9 @@ footer {
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo">SP</a>
+  <a href="#" class="nav-logo">
+    <img src="sp.png" alt="SP" />
+  </a>
   <ul class="nav-links">
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#about">About</a></li>
@@ -844,16 +859,6 @@ footer {
 
 <!-- HERO -->
 <section id="hero">
-
-  <!-- Decorative corner monogram (emboss-feel) -->
-  <div class="hero-monogram">
-    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- SP ligature-style mark -->
-      <path d="M10 42 C10 42 10 10 10 10 Q10 4 16 4 Q24 4 24 11 Q24 20 16 21 L10 21" stroke="#3D2420" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M10 21 L26 21" stroke="#3D2420" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M28 42 L28 4 L42 4 L42 10 Q42 20 34 20 L28 20 L28 28 L44 28 L44 42 L28 42Z" stroke="#3D2420" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
 
   <div class="hero-left">
     <p class="hero-eyebrow">Marketing &amp; Web · Chicago</p>
@@ -874,49 +879,9 @@ footer {
   </div>
 
   <div class="hero-right">
-    <!-- Embossed botanical SVG ring (referencing Dior / Studio Renée inspo) -->
-    <div class="hero-floral-ring">
-      <svg viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- outer arc ring -->
-        <circle cx="240" cy="240" r="220" stroke="#5C4033" stroke-width="0.8" stroke-dasharray="4 8"/>
-        <!-- petals — 8 botanical sprigs arranged radially -->
-        <g opacity="0.9">
-          <!-- top -->
-          <path d="M240 240 Q248 200 240 160 Q232 200 240 240Z" stroke="#5C4033" stroke-width="1.2" fill="none"/>
-          <ellipse cx="240" cy="155" rx="6" ry="10" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <circle cx="240" cy="142" r="3" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <!-- top-right -->
-          <path d="M240 240 Q270 208 290 172 Q262 202 240 240Z" stroke="#5C4033" stroke-width="1.2" fill="none"/>
-          <ellipse cx="293" cy="168" rx="6" ry="10" transform="rotate(45 293 168)" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <circle cx="302" cy="158" r="3" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <!-- right -->
-          <path d="M240 240 Q280 248 320 240 Q280 232 240 240Z" stroke="#5C4033" stroke-width="1.2" fill="none"/>
-          <ellipse cx="325" cy="240" rx="10" ry="6" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <circle cx="338" cy="240" r="3" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <!-- bottom-right -->
-          <path d="M240 240 Q270 272 290 308 Q262 278 240 240Z" stroke="#5C4033" stroke-width="1.2" fill="none"/>
-          <ellipse cx="293" cy="312" rx="6" ry="10" transform="rotate(-45 293 312)" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <circle cx="302" cy="322" r="3" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <!-- bottom -->
-          <path d="M240 240 Q248 280 240 320 Q232 280 240 240Z" stroke="#5C4033" stroke-width="1.2" fill="none"/>
-          <ellipse cx="240" cy="325" rx="6" ry="10" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <circle cx="240" cy="338" r="3" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <!-- bottom-left -->
-          <path d="M240 240 Q210 272 190 308 Q218 278 240 240Z" stroke="#5C4033" stroke-width="1.2" fill="none"/>
-          <ellipse cx="187" cy="312" rx="6" ry="10" transform="rotate(45 187 312)" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <circle cx="178" cy="322" r="3" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <!-- left -->
-          <path d="M240 240 Q200 248 160 240 Q200 232 240 240Z" stroke="#5C4033" stroke-width="1.2" fill="none"/>
-          <ellipse cx="155" cy="240" rx="10" ry="6" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <circle cx="142" cy="240" r="3" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <!-- top-left -->
-          <path d="M240 240 Q210 208 190 172 Q218 202 240 240Z" stroke="#5C4033" stroke-width="1.2" fill="none"/>
-          <ellipse cx="187" cy="168" rx="6" ry="10" transform="rotate(-45 187 168)" stroke="#5C4033" stroke-width="1" fill="none"/>
-          <circle cx="178" cy="158" r="3" stroke="#5C4033" stroke-width="1" fill="none"/>
-        </g>
-        <!-- inner decorative ring -->
-        <circle cx="240" cy="240" r="108" stroke="#5C4033" stroke-width="0.6" opacity="0.6"/>
-      </svg>
+    <!-- Large SP monogram watermark — ghosted / tonal -->
+    <div class="hero-sp-watermark">
+      <img src="sp.png" alt="" aria-hidden="true" />
     </div>
 
     <div class="hero-circle-text">
@@ -934,23 +899,41 @@ footer {
       <img src="headshot.jpeg" alt="Skylar Pulver" class="hero-photo" />
     </div>
   </div>
+
+  <!-- Ticker lives inside hero on mobile, spans full width at bottom -->
+  <div class="ticker-wrap hero-ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Landing Pages</span>
+      <span class="ticker-item">CRM Automation</span>
+      <span class="ticker-item">Paid Media</span>
+      <span class="ticker-item">Brand Strategy</span>
+      <span class="ticker-item">Email Marketing</span>
+      <span class="ticker-item">Web Development</span>
+      <span class="ticker-item">Landing Pages</span>
+      <span class="ticker-item">CRM Automation</span>
+      <span class="ticker-item">Paid Media</span>
+      <span class="ticker-item">Brand Strategy</span>
+      <span class="ticker-item">Email Marketing</span>
+      <span class="ticker-item">Web Development</span>
+    </div>
+  </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
+<!-- TICKER (desktop only — hidden on mobile) -->
+<div class="ticker-wrap desktop-ticker">
   <div class="ticker-track">
-    <span class="ticker-item">Landing Pages <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">CRM Automation <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Paid Media <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Brand Strategy <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Email Marketing <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Web Development <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Landing Pages <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">CRM Automation <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Paid Media <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Brand Strategy <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Email Marketing <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Web Development <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Landing Pages</span>
+    <span class="ticker-item">CRM Automation</span>
+    <span class="ticker-item">Paid Media</span>
+    <span class="ticker-item">Brand Strategy</span>
+    <span class="ticker-item">Email Marketing</span>
+    <span class="ticker-item">Web Development</span>
+    <span class="ticker-item">Landing Pages</span>
+    <span class="ticker-item">CRM Automation</span>
+    <span class="ticker-item">Paid Media</span>
+    <span class="ticker-item">Brand Strategy</span>
+    <span class="ticker-item">Email Marketing</span>
+    <span class="ticker-item">Web Development</span>
   </div>
 </div>
 
